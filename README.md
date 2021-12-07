@@ -2,20 +2,11 @@
 
 The Backend of Nuber Eats Clone
 
-## User Model:
+- Create Dish
+- Edit Dish
+- Delete Dish
 
-- id
-- createdAt
-- updatedAt
+- Orders CRUD
+- Orders Subscription (Owner, Customer, Delivery)
 
-- email
-- password
-- role(client|owner|delivery)
-
-## User CRUD:
-
-- Create Account
-- Log In
-- See Profile
-- Edit Profile
-- Verify Email
+- Payments (CRON)

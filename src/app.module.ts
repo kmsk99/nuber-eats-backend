@@ -39,6 +39,8 @@ import { UploadsModule } from './uploads/uploads.module';
         MAILGUN_API_KEY: Joi.string().required(),
         MAILGUN_DOMAIN_NAME: Joi.string().required(),
         MAILGUN_FROM_EMAIL: Joi.string().required(),
+        AWS_KEY: Joi.string().required(),
+        AWS_SECRET: Joi.string().required(),
       }),
     }),
     TypeOrmModule.forRoot({
@@ -63,14 +65,15 @@ import { UploadsModule } from './uploads/uploads.module';
       ],
     }),
     GraphQLModule.forRoot({
-      installSubscriptionHandlers: true,
-      autoSchemaFile: true,
-      context: ({ req, connection }) => {
-        const TOKEN_KEY = 'x-jwt';
-        return {
-          token: req ? req.headers[TOKEN_KEY] : connection.context[TOKEN_KEY],
-        };
+      subscriptions: {
+        'subscriptions-transport-ws': {
+          onConnect: (connectionParams: any) => ({
+            token: connectionParams['x-jwt'],
+          }),
+        },
       },
+      autoSchemaFile: true,
+      context: ({ req }) => ({ token: req.headers['x-jwt'] }), //http와 ws 따로 설정한다.
     }),
     ScheduleModule.forRoot(),
     JwtModule.forRoot({

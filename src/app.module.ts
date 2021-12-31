@@ -70,6 +70,7 @@ import { UploadsModule } from './uploads/uploads.module';
       ],
     }),
     GraphQLModule.forRoot({
+      playground: process.env.NODE_ENV !== 'production',
       subscriptions: {
         'subscriptions-transport-ws': {
           onConnect: (connectionParams: any) => ({

@@ -45,7 +45,7 @@ export class UserService {
       this.mailService.sendVerificationEmail(user.email, verification.code);
       return { ok: true };
     } catch (e) {
-      return { ok: false, error: "Couldn't create account \n" + e };
+      return { ok: false, error: "Couldn't create account" };
     }
   }
 

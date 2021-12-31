@@ -58,6 +58,10 @@ import { UploadsModule } from './uploads/uploads.module';
       logging:
         process.env.NODE_ENV !== 'production' &&
         process.env.NODE_ENV !== 'test',
+      ssl:
+        process.env.NODE_ENV !== 'production'
+          ? { rejectUnauthorized: false }
+          : false,
       entities: [
         User,
         Verification,
